@@ -1,11 +1,16 @@
 import fastify from 'fastify'
+import cookie from '@fastify/cookie'
+
 import { env } from './env'
 import { transactionsRoutes } from './routes/transactions'
 
 // base da app
 const server = fastify()
 
-server.register(transactionsRoutes)
+server.register(cookie)
+server.register(transactionsRoutes, {
+  prefix: 'transactions',
+})
 
 server
   .listen({
