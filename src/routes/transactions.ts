@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { string, z } from 'zod'
+import { z } from 'zod'
 import crypto, { randomUUID } from 'node:crypto'
 import { knex } from '../database'
 import { checkSessionIdExist } from '../middlewares/check-session-id-exist'
@@ -33,7 +33,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
     },
     async (req) => {
       const getTransactionParamsSchema = z.object({
-        id: string().uuid(),
+        id: z.string().uuid(),
       })
 
       const { id } = getTransactionParamsSchema.parse(req.params)
